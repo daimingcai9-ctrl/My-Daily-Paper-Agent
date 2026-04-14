@@ -36,7 +36,7 @@ def search_papers(keyword, max_results=3):
             
             results.append({
                 "title": title,
-                "summary": summary[:500] + "...", 
+                "summary": summary, 
                 "url": url_link
             })
             
