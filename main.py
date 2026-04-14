@@ -78,9 +78,9 @@ else:
 
     print("🧠 [大脑思考中] 正在利用 DeepSeek 总结论文...")
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model="deepseek-reasoner",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
+        
     )
     report_content = response.choices[0].message.content
 
