@@ -4,7 +4,7 @@ on:
   schedule:
     # 这里的 Cron 语法是 UTC 时间。
     # UTC 2点 = 北京时间早上 10点。
-    - cron: '0 2 * * *' 
+    - cron: '0 1 * * *' 
   workflow_dispatch: # 这个指令允许你随时手动点击运行测试
 
 jobs:
