@@ -24,3 +24,34 @@
 git clone [https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git](https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git)
 cd My-Daily-Paper-Agent
 pip install -r requirements.txt
+云端自动化部署说明（GitHub Actions）
+本项目支持在云端零成本每日定时运行。为了保护你的 DEEPSEEK_API_KEY，我们需要将其安全地存储在 GitHub 的加密 Secrets 中，代码会自动读取这些加密值。
+
+##配置 GitHub Secrets 步骤：
+登录 GitHub，进入你 Fork 或克隆后的仓库主页（daimingcai9-ctrl/My-Daily-Paper-Agent）。
+
+点击页面上方的 Settings 选项卡。
+
+在左侧菜单栏中，找到 Security 部分，依次点击 Secrets and variables -> Actions。
+
+在页面中间找到 Repository secrets 区域，点击绿色的 New repository secret 按钮。
+
+添加 API 密钥：
+
+Name 填入：DEEPSEEK_API_KEY
+
+Secret 填入：你真实的 DeepSeek API 密钥（以 sk- 开头的字符串）
+
+点击 Add secret 保存。
+
+添加飞书机器狗链接：
+
+再次点击 New repository secret。
+
+Name 填入：FEISHU_WEBHOOK
+
+Secret 填入：你真实的飞书 Webhook 完整 URL
+
+点击 Add secret 保存。
+
+配置完成后，GitHub Actions 会在每天的指定时间自动拉取代码并注入这些安全的密钥变量，实现文献推送。
