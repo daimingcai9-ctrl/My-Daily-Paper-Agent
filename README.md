@@ -1,25 +1,26 @@
-# My-Daily-Paper-Agent
+# My-Daily-Paper-Agent 🔬
 
-An asynchronous, multi-agent automated workflow for daily academic literature retrieval, deep reading, strict academic translation, and intelligent distribution.
+一个基于大语言模型协同的自动化工作流，专为科研人员设计，用于每日学术文献的自动检索、深度评估与智能情报分发。
 
-## 🌟 Core Features
+## 🌟 核心特性
 
-- **Long-Chain Reasoning**: Employs a Detect-Prompt-Segment style pipeline for literature: Retrieval -> CoT Evaluation -> Deep Reading -> Distribution.
-- **Academic Terminology Alignment**: Specialized translation agent designed to eliminate "AI-flavored" prose and translationese, ensuring high-quality, readable Chinese academic outputs.
-- **Automated Formatting**: Out-of-the-box support for generating **GB/T 7714-2015** standard citations, seamlessly integrating into LaTeX environments.
-- **Zero-Intervention Daily Run**: Fully integrated with GitHub Actions for daily CI/CD cron jobs, pushing intelligence directly to Feishu/WeChat.
+- **精准文献检索：** 挂载 Arxiv 等主流学术数据库 API，支持高级布尔逻辑查询（例如：`(世界模型 OR 智能体) AND (医学 OR 临床 OR 医疗)`），每日自动抓取特定前沿领域的最新文献。
+- **资深审稿人视角的结构化评估：** 接入 DeepSeek 大模型，采用资深审稿人的毒辣眼光对文献池进行评估，自动过滤“微创新”与“水文”，仅保留最具开创性的 Top-3 核心论文。
+- **深度结构化拆解：** 模型针对入选论文输出严格结构化的中文研报，涵盖核心任务、痛点挑战、方法方向、核心创新点以及原文实验数据，并提供生动的学术洞察。输出风格克制、严谨，避免了生硬的机器翻译腔调。
+- **飞书卡片自动推送：** 系统处理完毕后，开箱即用地自动生成美观的飞书互动卡片（Interactive Card），推送到移动端工作台，实现科研情报闭环。
+- **零人工干预的每日运行：** 深度集成 GitHub Actions 定时任务，实现真正的云端每日自动化运行。
 
-## ⚙️ Architecture
+## ⚙️ 系统架构与处理流程
 
-1. **Retrieval Agent**: Hooks into Arxiv/Semantic Scholar APIs based on dynamic keyword pools (e.g., *Medical VLMs, CT Segmentation*).
-2. **Evaluation Agent**: Performs CoT scoring to filter out noise and select Top-K papers.
-3. **Reading & Translation Agent**: Handles large context windows (10k+ tokens) for full-text parsing, maintaining structural integrity (formulas, pseudo-code).
-4. **Publish Agent**: Formats payloads and executes Webhook dispatch.
+1. **情报检索：** 通过 `skills.py` 模块自动拉取符合逻辑条件的当日新增文献摘要池。
+2. **核心研判：** 通过 Prompt 工程引导大语言模型（默认配置为 DeepSeek），从海量摘要中精准筛选并结构化拆解高分文献。
+3. **排版与分发：** 封装 JSON 格式的富文本内容，触发 Webhook 执行云端派发。
 
-## 🚀 Quick Start
+## 🚀 快速开始与本地测试
+
+克隆本项目到本地即可开始部署你个人的科研 Agent：
 
 ```bash
-git clone https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git
+git clone [https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git](https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git)
 cd My-Daily-Paper-Agent
 pip install -r requirements.txt
-python main.py
