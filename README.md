@@ -23,7 +23,8 @@
 ```bash
 git clone [https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git](https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git)
 cd My-Daily-Paper-Agent
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 云端自动化部署说明（GitHub Actions）
 本项目支持在云端零成本每日定时运行。为了保护你的 DEEPSEEK_API_KEY，我们需要将其安全地存储在 GitHub 的加密 Secrets 中，代码会自动读取这些加密值。
 
