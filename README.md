@@ -19,7 +19,7 @@ An asynchronous, multi-agent automated workflow for daily academic literature re
 ## 🚀 Quick Start
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/ScholarPulse-Agent.git](https://github.com/YOUR_USERNAME/ScholarPulse-Agent.git)
-cd ScholarPulse-Agent
+git clone https://github.com/daimingcai9-ctrl/My-Daily-Paper-Agent.git
+cd My-Daily-Paper-Agent
 pip install -r requirements.txt
 python main.py
