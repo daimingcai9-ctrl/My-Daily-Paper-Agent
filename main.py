@@ -9,7 +9,7 @@ from skills import search_papers
 # ==========================================
 # ⚠️ 永远不要在这里写上真实的 tp-... 密钥！
 # 已将其改为读取小米的 API Key 环境变量
-MIMO_API_KEY = os.getenv("XIAOMI_API_KEY") 
+XIAOMI_API_KEY = os.getenv("XIAOMI_API_KEY") 
 FEISHU_WEBHOOK = os.getenv("FEISHU_WEBHOOK")
 
 # 安全检查：如果没有读取到密钥，直接报错退出，防止程序瞎跑
