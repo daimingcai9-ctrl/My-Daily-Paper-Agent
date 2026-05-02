@@ -7,17 +7,22 @@ from skills import search_papers
 # ==========================================
 # 1. 绝对安全：从环境变量读取密钥
 # ==========================================
-# ⚠️ 永远不要在这里写上真实的 sk-... 密钥！
-DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY") 
+# ⚠️ 永远不要在这里写上真实的 tp-... 密钥！
+# 已将其改为读取小米的 API Key 环境变量
+MIMO_API_KEY = os.getenv("XIAOMI_API_KEY") 
 FEISHU_WEBHOOK = os.getenv("FEISHU_WEBHOOK")
 
 # 安全检查：如果没有读取到密钥，直接报错退出，防止程序瞎跑
-if not DEEPSEEK_API_KEY or not FEISHU_WEBHOOK:
-    print("❌ 致命错误：未找到 API 密钥或飞书 Webhook 链接！")
-    print("👉 本地运行请先在终端执行 export 命令，云端运行请检查 GitHub Secrets。")
+if not XIAOMI_API_KEY or not FEISHU_WEBHOOK:
+    print("❌ 致命错误：未找到小米 API 密钥或飞书 Webhook 链接！")
+    print("👉 本地运行请先在终端执行 export MIMO_API_KEY='tp-你的密钥'，云端运行请检查 GitHub Secrets。")
     exit(1)
 
-client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com")
+# 初始化客户端，替换为小米 Token Plan 的专属 Base URL
+client = OpenAI(
+    api_key=XIAOMI_API_KEY, 
+    base_url="https://token-plan-cn.xiaomimimo.com/v1" 
+)
 
 # ==========================================
 # 2. Agent 运行逻辑 (保持不变)
@@ -41,7 +46,7 @@ else:
     【核心任务】
     请你先以审稿人的毒辣眼光对这批论文进行评估，**只挑选出其中最硬核、最具开创性的 3 篇论文**（宁缺毋滥，如果不够 3 篇则有几篇选几篇）。直接淘汰掉那些微创新或水文，不要在汇报中提及它们。
 
-    对于入选的这 3 篇顶级论文，请严格按照以下 Markdown 模板用中文进行深度结构化拆解汇报，绝不能省略任何一个模块：
+    对于入选的这 3 篇顶级论文，请严格按照以下 Markdown 模板用中文进行深度结构化拆解汇报，绝不能省略任何一个模块。请使用专业、现代的学术散文风格，避免使用生硬或过于古代文言文风格的AI翻译腔：
 
     ---
     **论文标题**：[填入原英文标题]
@@ -76,23 +81,23 @@ else:
     （如果输入包含多篇论文，请依次按上述格式严格输出，中间用分隔线隔开）
     """
 
-    print("🧠 [大脑思考中] 正在利用 DeepSeek 总结论文...")
+    print("🧠 [大脑思考中] 正在利用 Xiaomi MiMo 总结论文...")
     response = client.chat.completions.create(
-        model="deepseek-v4-pro",
+        model="mimo-v2.5-pro", # 使用小米目前最强推理能力的模型
         messages=[{"role": "user", "content": prompt}],
-        
     )
     report_content = response.choices[0].message.content
 
     # ==========================================
-    # 3. 推送飞书卡片 (保持不变)
+    # 3. 推送飞书卡片
     # ==========================================
     print("📨 [信使出发] 正在发送飞书动态卡片...")
     payload = {
         "msg_type": "interactive",
         "card": {
             "header": {
-                "title": {"tag": "plain_text", "content": "📅 AI 学术日报 (DeepSeek 版)"},
+                # 顺手把卡片标题的后缀也改成了小米版
+                "title": {"tag": "plain_text", "content": "📅 AI 学术日报 (MiMo 版)"},
                 "template": "blue"
             },
             "elements": [
